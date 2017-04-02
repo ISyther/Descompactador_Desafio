@@ -1,29 +1,32 @@
 import os
 import tarfile
 
-ano = 2017
+pasta = 2017
 diretorio= os.getcwd()
-
-file = tarfile.open(diretorio + "/" + str(ano) + ".tar.gz") #Descompacta o primeiro arquivo
+					
+file = tarfile.open(diretorio + "/" + str(pasta) + ".tar.gz") #Descompacta o primeiro arquivo
 
 file.extractall(diretorio) #Vai pro diretorio que esta o sript (descompacta)
 
 file.close()
 
-os.chdir(str(ano))# Vai pra primeira pasta (2017)
+os.chdir(str(pasta))# Vai pra primeira pasta (2017)
 
 
-ano-=1#Tira um ano para ir para pasta 2016
+pasta-=1
 
-while ano >=0:
-	file = tarfile.open(os.getcwd() + "/" + str(ano) + ".tar.gz") 
+while pasta >=0:
+	try:
+		file = tarfile.open(os.getcwd() + "/" + str(pasta) + ".tar.gz") 
 
-	file.extractall(diretorio) #Extrai tudo pro diretorio inicial
+		file.extractall(diretorio) #Extrai tudo pro diretorio inicial
 
-	file.close()
+		file.close()
 
-	os.chdir(diretorio) #Volta pro diretorio inicial
-	os.chdir(str(ano)) #Vai pra pasta q foi extraida
+		os.chdir(diretorio) #Volta pro diretorio inicial
+		os.chdir(str(pasta)) #Vai pra pasta q foi extraida
 
-	ano-=1 #Tira um ano
+		pasta-=1 
 
+	except:
+		print("Acabou!")
